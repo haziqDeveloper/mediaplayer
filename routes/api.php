@@ -21,8 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-<<<<<<< HEAD
-Route::post('login', [CustomAuthController::class, 'customLogin']);
+// Route::post('login', [CustomAuthController::class, 'customLogin']);
+Route::post('login', [CustomAuthController::class, 'apiLogin']);
 
 Route::post('deviceinfo',[DeviceController::class, 'storeDevice']);
 
@@ -51,11 +51,5 @@ Route::post('changeItemStatus/{id}',[DeviceController::class, 'changeItemStatus'
 Route::delete('deletedeviceinfo/{id}',[DeviceController::class, 'deleteDeviceinfo']);
 
 Route::delete('deletechecksum/{id}',[DeviceController::class, 'deleteChecksum']);
- 
-=======
-Route::post('login', [CustomAuthController::class, 'apiLogin']);
 
-Route::post('deviceinfo',[DeviceController::class, 'storeDevice']);
 
-Route::get('devices',[DeviceController::class, 'indexDevice']);
->>>>>>> 578a3b5ac4e12eacfb9c62170ccdf3ec8481689c
