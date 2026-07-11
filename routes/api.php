@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DeviceController;
-use App\Http\Controllers\CustomAuthController;
 
 /*
 |--------------------------------------------------------------------------
