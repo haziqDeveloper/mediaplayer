@@ -18,20 +18,33 @@ class CustomAuthController extends Controller
         return redirect('login');
     }
       
-    public function customLogin(Request $request)
+   public function customLogin(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+        $fields = $request->validate([
+
+            'email'=>'required|string|email',
+            'password'=>'required|string'   
+           ]);
    
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect('/add-domain-url')
-                        ->withSuccess('Signed in');
-        }
-  
-        return redirect('/login')->withSuccess('Login details are not valid');
+           //Check email
+   
+           $user= User::where('email', $fields['email'])->first();
+   
+           //Check Password
+           if(!$user || !Hash::check($fields['password'], $user->password) ){
+               return response([
+                   'message'=>'Invalid Credentials'
+               ], 401);
+           }
+   
+           $token = $user->createToken('myapptoken')->plainTextToken;
+   
+           $response= [
+               'user' => $user,
+               'token'=> $token
+           ];
+   
+           return response($response, 201);
     }
 
     public function registration()
