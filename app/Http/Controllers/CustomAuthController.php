@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class CustomAuthController extends Controller
 {
     public function index()
@@ -32,6 +34,29 @@ class CustomAuthController extends Controller
         }
   
         return redirect('/login')->withSuccess('Login details are not valid');
+    }
+
+    public function apiLogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Invalid login details',
+            ], 401);
+        }
+
+        return response()->json([
+            'message' => 'Signed in',
+            'token' => $user->createToken('frontend')->plainTextToken,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ]);
     }
 
     public function registration()

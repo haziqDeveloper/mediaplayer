@@ -29,4 +29,11 @@ class ExampleTest extends TestCase
         $response->assertOk();
         $response->assertSee('Create account');
     }
+
+    public function test_api_login_route_exists(): void
+    {
+        $response = $this->postJson('/api/login', []);
+
+        $response->assertStatus(422);
+    }
 }

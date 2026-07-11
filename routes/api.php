@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DeviceController;
 
 /*
@@ -18,6 +19,8 @@ use App\Http\Controllers\DeviceController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login', [CustomAuthController::class, 'apiLogin']);
 
 Route::post('deviceinfo',[DeviceController::class, 'storeDevice']);
 
