@@ -31,4 +31,4 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-Route::get('dashboard',[DashBoardController::class, 'index']);
+Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
