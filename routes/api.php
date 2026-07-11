@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\CustomAuthController;
 
@@ -20,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
 Route::post('login', [CustomAuthController::class, 'customLogin']);
 
 Route::post('deviceinfo',[DeviceController::class, 'storeDevice']);
@@ -50,3 +52,10 @@ Route::delete('deletedeviceinfo/{id}',[DeviceController::class, 'deleteDeviceinf
 
 Route::delete('deletechecksum/{id}',[DeviceController::class, 'deleteChecksum']);
  
+=======
+Route::post('login', [CustomAuthController::class, 'apiLogin']);
+
+Route::post('deviceinfo',[DeviceController::class, 'storeDevice']);
+
+Route::get('devices',[DeviceController::class, 'indexDevice']);
+>>>>>>> 578a3b5ac4e12eacfb9c62170ccdf3ec8481689c
