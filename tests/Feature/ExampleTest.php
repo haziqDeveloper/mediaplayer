@@ -13,4 +13,20 @@ class ExampleTest extends TestCase
 
         $response->assertRedirect('/login');
     }
+
+    public function test_login_page_loads(): void
+    {
+        $response = $this->get('/login');
+
+        $response->assertOk();
+        $response->assertSee('Sign in');
+    }
+
+    public function test_registration_page_loads(): void
+    {
+        $response = $this->get('/registration');
+
+        $response->assertOk();
+        $response->assertSee('Create account');
+    }
 }
